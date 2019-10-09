@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		DBB31257234C561400A8D7D6 /* Light.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB3124D234C561400A8D7D6 /* Light.framework */; };
-		DBB3125C234C561400A8D7D6 /* LightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB3125B234C561400A8D7D6 /* LightTests.swift */; };
 		DBB3125E234C561400A8D7D6 /* Light.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB31250234C561400A8D7D6 /* Light.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBB31268234C566500A8D7D6 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB31267234C566500A8D7D6 /* Future.swift */; };
 		DBB3126E234D69C800A8D7D6 /* FutureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB3126D234D69C800A8D7D6 /* FutureTests.swift */; };
+		DBB31270234DAD4300A8D7D6 /* CancellableFuture.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB3126F234DAD4300A8D7D6 /* CancellableFuture.swift */; };
+		DBB31272234DB8C200A8D7D6 /* CancellableFutureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB31271234DB8C200A8D7D6 /* CancellableFutureTests.swift */; };
+		DBB31274234DB99C00A8D7D6 /* XCTestCase+Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB31273234DB99C00A8D7D6 /* XCTestCase+Expectation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,10 +31,12 @@
 		DBB31250234C561400A8D7D6 /* Light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
 		DBB31251234C561400A8D7D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBB31256234C561400A8D7D6 /* LightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DBB3125B234C561400A8D7D6 /* LightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTests.swift; sourceTree = "<group>"; };
 		DBB3125D234C561400A8D7D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBB31267234C566500A8D7D6 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
 		DBB3126D234D69C800A8D7D6 /* FutureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureTests.swift; sourceTree = "<group>"; };
+		DBB3126F234DAD4300A8D7D6 /* CancellableFuture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellableFuture.swift; sourceTree = "<group>"; };
+		DBB31271234DB8C200A8D7D6 /* CancellableFutureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellableFutureTests.swift; sourceTree = "<group>"; };
+		DBB31273234DB99C00A8D7D6 /* XCTestCase+Expectation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Expectation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,7 @@
 				DBB31250234C561400A8D7D6 /* Light.h */,
 				DBB31251234C561400A8D7D6 /* Info.plist */,
 				DBB31267234C566500A8D7D6 /* Future.swift */,
+				DBB3126F234DAD4300A8D7D6 /* CancellableFuture.swift */,
 			);
 			path = Light;
 			sourceTree = "<group>";
@@ -85,8 +90,9 @@
 		DBB3125A234C561400A8D7D6 /* LightTests */ = {
 			isa = PBXGroup;
 			children = (
-				DBB3125B234C561400A8D7D6 /* LightTests.swift */,
 				DBB3126D234D69C800A8D7D6 /* FutureTests.swift */,
+				DBB31273234DB99C00A8D7D6 /* XCTestCase+Expectation.swift */,
+				DBB31271234DB8C200A8D7D6 /* CancellableFutureTests.swift */,
 				DBB3125D234C561400A8D7D6 /* Info.plist */,
 			);
 			path = LightTests;
@@ -203,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBB31268234C566500A8D7D6 /* Future.swift in Sources */,
+				DBB31270234DAD4300A8D7D6 /* CancellableFuture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +218,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBB3126E234D69C800A8D7D6 /* FutureTests.swift in Sources */,
-				DBB3125C234C561400A8D7D6 /* LightTests.swift in Sources */,
+				DBB31274234DB99C00A8D7D6 /* XCTestCase+Expectation.swift in Sources */,
+				DBB31272234DB8C200A8D7D6 /* CancellableFutureTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

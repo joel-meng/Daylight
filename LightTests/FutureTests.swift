@@ -126,15 +126,4 @@ class FutureTests: XCTestCase {
 			initialFuture.reject(with: stubError)
 		})
 	}
-
-
-	func expect(_ _expectation: String, _ willHappen: (XCTestExpectation) -> Void, within time: TimeInterval = 0.2) {
-		let callbackCalled = expectation(description: _expectation)
-		willHappen(callbackCalled)
-		waitForExpectations(timeout: time) { (error) in
-			if let error = error {
-				XCTFail(error.localizedDescription)
-			}
-		}
-	}
 }

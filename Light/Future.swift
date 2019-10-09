@@ -51,24 +51,22 @@ public protocol FutureObserver {
 
 	/// Add a listener for `Future`'s success values.
 	/// - Parameter successCallback: A callback function that consumes success `Value` from `Future`
-	@discardableResult
-	func onSuccess(_ successCallback: @escaping (Value) -> Void) -> Self
+	func onSuccess(_ successCallback: @escaping (Value) -> Void)
 
 	/// Add a listener for `Future`'s success values and failure error.
 	/// - Parameter successCallback: A callback function that consumes success `Value` from `Future`
 	/// - Parameter failureCallback: A callback function that consumes failure `Error` from `Future`
-	@discardableResult
-	func on(success successCallback: @escaping (Value) -> Void, failure failureCallback: ((Error) -> Void)?) -> Self
+	func on(success successCallback: @escaping (Value) -> Void, failure failureCallback: ((Error) -> Void)?)
 }
 
 
 public class Future<Value>: FutureUpdater, FutureObserver {
 
 	/// Listeners who is observing result's update
-	private lazy var listeners: [(Result<Value, Error>) -> Void] = []
+	lazy var listeners: [(Result<Value, Error>) -> Void] = []
 
 	/// Result data that to be notified in future.
-	private var result: Result<Value, Error>? {
+	var result: Result<Value, Error>? {
 		didSet { result.map(notify) }
 	}
 
@@ -93,14 +91,12 @@ public class Future<Value>: FutureUpdater, FutureObserver {
 
 	// MARK: - Listening
 
-	@discardableResult
-	public func onSuccess(_ successCallback: @escaping (Value) -> Void) -> Self {
-		return on(success: successCallback, failure: nil)
+	public func onSuccess(_ successCallback: @escaping (Value) -> Void) {
+		on(success: successCallback, failure: nil)
 	}
 
-	@discardableResult
 	public func on(success successCallback: @escaping (Value) -> Void,
-			failure failureCallback: ((Error) -> Void)?) -> Self {
+			failure failureCallback: ((Error) -> Void)?) {
 		listeners.append({ (result) in
 			switch result {
 			case .success(let value):
@@ -110,7 +106,6 @@ public class Future<Value>: FutureUpdater, FutureObserver {
 			}
 		})
 		result.map(notify)
-		return self
 	}
 
 	// MARK: - Result updating
