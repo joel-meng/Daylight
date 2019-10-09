@@ -10,6 +10,8 @@
 		DBB31257234C561400A8D7D6 /* Light.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB3124D234C561400A8D7D6 /* Light.framework */; };
 		DBB3125C234C561400A8D7D6 /* LightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB3125B234C561400A8D7D6 /* LightTests.swift */; };
 		DBB3125E234C561400A8D7D6 /* Light.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB31250234C561400A8D7D6 /* Light.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DBB31268234C566500A8D7D6 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB31267234C566500A8D7D6 /* Future.swift */; };
+		DBB3126E234D69C800A8D7D6 /* FutureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB3126D234D69C800A8D7D6 /* FutureTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,8 @@
 		DBB31256234C561400A8D7D6 /* LightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB3125B234C561400A8D7D6 /* LightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTests.swift; sourceTree = "<group>"; };
 		DBB3125D234C561400A8D7D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBB31267234C566500A8D7D6 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
+		DBB3126D234D69C800A8D7D6 /* FutureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 			children = (
 				DBB31250234C561400A8D7D6 /* Light.h */,
 				DBB31251234C561400A8D7D6 /* Info.plist */,
+				DBB31267234C566500A8D7D6 /* Future.swift */,
 			);
 			path = Light;
 			sourceTree = "<group>";
@@ -81,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				DBB3125B234C561400A8D7D6 /* LightTests.swift */,
+				DBB3126D234D69C800A8D7D6 /* FutureTests.swift */,
 				DBB3125D234C561400A8D7D6 /* Info.plist */,
 			);
 			path = LightTests;
@@ -148,6 +154,7 @@
 				TargetAttributes = {
 					DBB3124C234C561400A8D7D6 = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 					};
 					DBB31255234C561400A8D7D6 = {
 						CreatedOnToolsVersion = 11.0;
@@ -195,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBB31268234C566500A8D7D6 /* Future.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBB3126E234D69C800A8D7D6 /* FutureTests.swift in Sources */,
 				DBB3125C234C561400A8D7D6 /* LightTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,7 +277,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -325,7 +334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -340,6 +349,7 @@
 		DBB31262234C561400A8D7D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = B36U447ANB;
@@ -356,6 +366,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.au.joel.meng.Light;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -364,6 +375,7 @@
 		DBB31263234C561400A8D7D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = B36U447ANB;
@@ -388,6 +400,7 @@
 		DBB31265234C561400A8D7D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B36U447ANB;
 				INFOPLIST_FILE = LightTests/Info.plist;
@@ -406,6 +419,7 @@
 		DBB31266234C561400A8D7D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B36U447ANB;
 				INFOPLIST_FILE = LightTests/Info.plist;
