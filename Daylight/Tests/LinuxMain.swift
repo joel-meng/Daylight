@@ -3,5 +3,6 @@ import XCTest
 import DaylightTests
 
 var tests = [XCTestCaseEntry]()
-tests += DaylightTests.allTests()
+tests += DaylightTests.__allTests()
+
 XCTMain(tests)
