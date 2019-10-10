@@ -3,17 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB21E9A2234EB05D004090E5 /* Daylight in Frameworks */ = {isa = PBXBuildFile; productRef = DB21E9A1234EB05D004090E5 /* Daylight */; };
 		DBB31257234C561400A8D7D6 /* Light.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB3124D234C561400A8D7D6 /* Light.framework */; };
 		DBB3125E234C561400A8D7D6 /* Light.h in Headers */ = {isa = PBXBuildFile; fileRef = DBB31250234C561400A8D7D6 /* Light.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DBB31268234C566500A8D7D6 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB31267234C566500A8D7D6 /* Future.swift */; };
-		DBB3126E234D69C800A8D7D6 /* FutureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB3126D234D69C800A8D7D6 /* FutureTests.swift */; };
-		DBB31270234DAD4300A8D7D6 /* CancellableFuture.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB3126F234DAD4300A8D7D6 /* CancellableFuture.swift */; };
-		DBB31272234DB8C200A8D7D6 /* CancellableFutureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB31271234DB8C200A8D7D6 /* CancellableFutureTests.swift */; };
-		DBB31274234DB99C00A8D7D6 /* XCTestCase+Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB31273234DB99C00A8D7D6 /* XCTestCase+Expectation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,11 +28,6 @@
 		DBB31251234C561400A8D7D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBB31256234C561400A8D7D6 /* LightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB3125D234C561400A8D7D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DBB31267234C566500A8D7D6 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
-		DBB3126D234D69C800A8D7D6 /* FutureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureTests.swift; sourceTree = "<group>"; };
-		DBB3126F234DAD4300A8D7D6 /* CancellableFuture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellableFuture.swift; sourceTree = "<group>"; };
-		DBB31271234DB8C200A8D7D6 /* CancellableFutureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellableFutureTests.swift; sourceTree = "<group>"; };
-		DBB31273234DB99C00A8D7D6 /* XCTestCase+Expectation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Expectation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB21E9A2234EB05D004090E5 /* Daylight in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,12 +50,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB21E9A0234EB05D004090E5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DBB31243234C561400A8D7D6 = {
 			isa = PBXGroup;
 			children = (
 				DBB3124F234C561400A8D7D6 /* Light */,
 				DBB3125A234C561400A8D7D6 /* LightTests */,
 				DBB3124E234C561400A8D7D6 /* Products */,
+				DB21E9A0234EB05D004090E5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,8 +81,6 @@
 			children = (
 				DBB31250234C561400A8D7D6 /* Light.h */,
 				DBB31251234C561400A8D7D6 /* Info.plist */,
-				DBB31267234C566500A8D7D6 /* Future.swift */,
-				DBB3126F234DAD4300A8D7D6 /* CancellableFuture.swift */,
 			);
 			path = Light;
 			sourceTree = "<group>";
@@ -90,9 +88,6 @@
 		DBB3125A234C561400A8D7D6 /* LightTests */ = {
 			isa = PBXGroup;
 			children = (
-				DBB3126D234D69C800A8D7D6 /* FutureTests.swift */,
-				DBB31273234DB99C00A8D7D6 /* XCTestCase+Expectation.swift */,
-				DBB31271234DB8C200A8D7D6 /* CancellableFutureTests.swift */,
 				DBB3125D234C561400A8D7D6 /* Info.plist */,
 			);
 			path = LightTests;
@@ -126,6 +121,9 @@
 			dependencies = (
 			);
 			name = Light;
+			packageProductDependencies = (
+				DB21E9A1234EB05D004090E5 /* Daylight */,
+			);
 			productName = Light;
 			productReference = DBB3124D234C561400A8D7D6 /* Light.framework */;
 			productType = "com.apple.product-type.framework";
@@ -208,8 +206,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBB31268234C566500A8D7D6 /* Future.swift in Sources */,
-				DBB31270234DAD4300A8D7D6 /* CancellableFuture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,9 +213,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBB3126E234D69C800A8D7D6 /* FutureTests.swift in Sources */,
-				DBB31274234DB99C00A8D7D6 /* XCTestCase+Expectation.swift in Sources */,
-				DBB31272234DB8C200A8D7D6 /* CancellableFutureTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +359,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Light/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -392,6 +386,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Light/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -408,7 +403,6 @@
 		DBB31265234C561400A8D7D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B36U447ANB;
 				INFOPLIST_FILE = LightTests/Info.plist;
@@ -427,7 +421,6 @@
 		DBB31266234C561400A8D7D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B36U447ANB;
 				INFOPLIST_FILE = LightTests/Info.plist;
@@ -474,6 +467,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DB21E9A1234EB05D004090E5 /* Daylight */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Daylight;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DBB31244234C561400A8D7D6 /* Project object */;
 }

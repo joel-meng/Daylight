@@ -12,7 +12,7 @@
 //	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import XCTest
-@testable import Light
+@testable import Daylight
 
 class CancellableFutureTests: XCTestCase {
 
@@ -21,6 +21,8 @@ class CancellableFutureTests: XCTestCase {
 
     override func tearDown() {
     }
+
+	// MARK: - Creation
 
 	func testCancellableFutureCreationInitialState() {
 		let cancellableFuture = CancellableFuture<Int>()
@@ -146,5 +148,14 @@ class CancellableFutureTests: XCTestCase {
 			cancellableFuture.cancel()
 		})
 	}
+
+	// MARK: - Cancel state
+
+	func testCancelState() {
+		let future = CancellableFuture<Int>()
+		future.cancel()
+		XCTAssertTrue(future.isCancelled)
+	}
+
 
 }

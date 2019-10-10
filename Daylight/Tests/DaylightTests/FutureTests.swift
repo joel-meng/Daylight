@@ -23,7 +23,7 @@
  */
 
 import XCTest
-@testable import Light
+@testable import Daylight
 
 class FutureTests: XCTestCase {
 
