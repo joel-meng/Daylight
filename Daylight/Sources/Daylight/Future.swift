@@ -26,6 +26,8 @@ import Foundation
 
 typealias Promise<Input, Output> = (Input) -> Future<Output>
 
+typealias FutureType = FutureUpdater & FutureObserver
+
 // MARK: - Future Updater
 
 /// An protocol exposes to future updater functions that to tell a `Future` a value is ready or error happened.
