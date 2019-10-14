@@ -65,24 +65,25 @@ public protocol FutureObserver {
 public class Future<Value>: FutureUpdater, FutureObserver {
 
 	/// Listeners who is observing result's update
-	lazy var listeners: [(Result<Value, Error>) -> Void] = []
+	private lazy var listeners: [(Result<Value, Error>) -> Void] = []
 
 	/// Result data that to be notified in future.
-	var result: Result<Value, Error>? {
-		didSet { result.map(notify) }
+	private var result: Atomic<Result<Value, Error>?> {
+		didSet { result.value.map(notify) }
 	}
 
 	// MARK: - Initializer
 
 	public init() {
+		result = Atomic(nil)
 	}
 
 	public init(_ value: Value) {
-		result = .success(value)
+		result = Atomic(.success(value))
 	}
 
 	public init(error: Error) {
-		result = .failure(error)
+		result = Atomic(.failure(error))
 	}
 
 	// MARK: - Listener notification
@@ -107,17 +108,22 @@ public class Future<Value>: FutureUpdater, FutureObserver {
 				failureCallback?(error)
 			}
 		})
-		result.map(notify)
+
+		result.value.map(notify)
 	}
 
 	// MARK: - Result updating
 
 	public func resolve(with value: Value) {
-		result = .success(value)
+		result.value({ result in
+			result = .success(value)
+		})
 	}
 
 	public func reject(with error: Error) {
-		result = .failure(error)
+		result.value({ result in
+			result = .failure(error)
+		})
 	}
 
 	// MARK: - Functional

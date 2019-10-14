@@ -26,7 +26,7 @@ import XCTest
 
 extension XCTestCase {
 
-	func expect(_ _expectation: String, _ willHappen: (XCTestExpectation) -> Void, within time: TimeInterval = 0.2, fulfillmentCount : Int = 1) {
+	func expect(_ _expectation: String, _ willHappen: (XCTestExpectation) -> Void, within time: TimeInterval = 0.3, fulfillmentCount : Int = 1) {
 		let exp = expectation(description: _expectation)
 		exp.expectedFulfillmentCount = fulfillmentCount 
 		willHappen(exp)
