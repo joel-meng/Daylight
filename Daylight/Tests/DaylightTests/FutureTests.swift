@@ -183,4 +183,30 @@ class FutureTests: XCTestCase {
 			}
 		}, within: 4, fulfillmentCount: 100_000)
 	}
+
+	func testFutureWithConcurrencySuccessAndFailureWithMapping() {
+		let initialFuture = Future<Int>()
+		let futureUT = initialFuture.map {
+			$0 * 2
+		}
+		let stubError = NSError(domain: "", code: 1, userInfo: nil)
+
+		expect("Future notifies success and failure 100_000 times", { expectation in
+			futureUT.on(success: { _ in
+				expectation.fulfill()
+			},
+			failure: { _ in
+				expectation.fulfill()
+			})
+			DispatchQueue.concurrentPerform(iterations: 100) {
+				if $0.isMultiple(of: 2) {
+					initialFuture.reject(with: stubError)
+				}
+				else {
+					initialFuture.resolve(with: $0)
+				}
+			}
+		}, within: 4, fulfillmentCount: 100)
+	}
+
 }
