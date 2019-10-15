@@ -24,6 +24,10 @@ SOFTWARE.
 
 import Foundation
 
+/// An internal `Concurrent` dispatch queue that used to invoke `cancel` function.
+private let cancellationQueue = DispatchQueue(label: "CancellableFuture Concurrent Queue - Daylight/joel-meng/com.github",
+											  attributes: .concurrent)
+
 /// A protocol defines `FutureObserver` who can be cancelled.
 public protocol Cancellable {
 
@@ -66,10 +70,11 @@ final public class CancellableFuture<Value>: Cancellable, FutureObserver, Future
 	// MARK: - Cancellable
 
 	public func cancel() {
-
-		cancelAction?()
-
-		isCancelled = true
+		cancellationQueue.sync(flags: .barrier) { [weak self] in
+			guard let self = self else { return }
+			self.isCancelled = true
+			self.cancelAction?()
+		}
 	}
 
 	// MARK: - FutureObserver

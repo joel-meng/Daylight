@@ -41,7 +41,7 @@ class AtomicTests: XCTestCase {
 	// MARK: - Preformance Tests
 
     func testAtomicWrite() {
-		var atomic = Atomic<Int>(0)
+		let atomic = Atomic<Int>(0)
 
 		self.measure {
 			atomic.value { $0 = 0}
@@ -55,7 +55,7 @@ class AtomicTests: XCTestCase {
     }
 
     func testAtomicAccationalReading() {
-		var atomic = Atomic<Int>(0)
+		let atomic = Atomic<Int>(0)
 
 		self.measure {
 			atomic.value { $0 = 0}
@@ -72,7 +72,7 @@ class AtomicTests: XCTestCase {
     }
 
 	func testAtomicIntensiveWritingWithReading() {
-		var atomic = Atomic<Int>(0)
+		let atomic = Atomic<Int>(0)
 
 		self.measure {
 			atomic.value { $0 = 0}

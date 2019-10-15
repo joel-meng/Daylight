@@ -61,17 +61,19 @@ public protocol FutureObserver {
 	func on(success successCallback: @escaping (Value) -> Void, failure failureCallback: ((Error) -> Void)?)
 }
 
+/// An internal `Concurrent` dispatch queue that used to invoke `listeners` callback.
+private let notificationQueue = DispatchQueue(label: "Future Concurrent Queue - Daylight/joel-meng/com.github",
+											  attributes: .concurrent)
+
 public class Future<Value>: FutureUpdater, FutureObserver {
 
 	/// Listeners who is observing result's update
 	private lazy var listeners: [(Result<Value, Error>) -> Void] = []
 
 	/// Result data that to be notified in future.
-	private var result: Atomic<Result<Value, Error>?> {
-		didSet {
-			(result.value).map(notify)
-		}
-	}
+	private let result: Atomic<Result<Value, Error>?>
+
+	private var notificationQueue: DispatchQueue?
 
 	// MARK: - Initializer
 
@@ -117,12 +119,14 @@ public class Future<Value>: FutureUpdater, FutureObserver {
 	public func resolve(with value: Value) {
 		result.value {
 			$0 = .success(value)
+			$0.map(notify)
 		}
 	}
 
 	public func reject(with error: Error) {
 		result.value {
 			$0 = .failure(error)
+			$0.map(notify)
 		}
 	}
 

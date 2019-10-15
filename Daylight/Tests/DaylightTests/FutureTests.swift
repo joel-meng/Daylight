@@ -62,7 +62,7 @@ class FutureTests: XCTestCase {
 
 	func testFutureResolvedWithValue() {
 		let futureUT = Future<Int>()
-		expect("Success should be caled", { (expectation) in
+		expect("Success should be called", { (expectation) in
 			futureUT.onSuccess { (futureValue) in
 				expectation.fulfill()
 				XCTAssert(futureValue == 2)
@@ -90,11 +90,11 @@ class FutureTests: XCTestCase {
 
 	func testFutureResolvedMappingWithValue() {
 		let initialFuture = Future<Int>()
-		let futureUT = initialFuture.map { $0 * 2 }
-		expect("Success should be caled", { (expectation) in
+		let futureUT = initialFuture.map { $0 * 2 }.map {  $0 * 2 }
+		expect("Success should be called", { (expectation) in
 			futureUT.onSuccess { (futureValue) in
 				expectation.fulfill()
-				XCTAssert(futureValue == 4)
+				XCTAssert(futureValue == 8)
 			}
 			initialFuture.resolve(with: 2)
 		})
@@ -103,7 +103,7 @@ class FutureTests: XCTestCase {
 	func testFutureResolvedMappingWithDifferentTypeValue() {
 		let initialFuture = Future<Int>()
 		let futureUT = initialFuture.map { "\($0)" }
-		expect("Success should be caled", { (expectation) in
+		expect("Success should be called", { (expectation) in
 			futureUT.onSuccess { (futureValue) in
 				expectation.fulfill()
 				XCTAssertEqual(futureValue, "2")
@@ -116,7 +116,7 @@ class FutureTests: XCTestCase {
 		let stubError = NSError(domain: "", code: 1, userInfo: nil)
 		let initialFuture = Future<Int>()
 		let futureUT = initialFuture.map { $0 * 2 }
-		expect("Success should be caled", { (expectation) in
+		expect("Success should be called", { (expectation) in
 			futureUT.on(success: { _ in
 				XCTFail("Should never be called.")
 			}, failure: { error in
@@ -125,5 +125,62 @@ class FutureTests: XCTestCase {
 			})
 			initialFuture.reject(with: stubError)
 		})
+	}
+
+	// MARK: - Concurrency
+
+	func testFutureWithConcurrencySuccess() {
+		let futureUT = Future<Int>()
+		expect("Future notifies success 1000 times", { expectation in
+			futureUT.on(success: { (newValue) in
+				XCTAssertGreaterThanOrEqual(newValue, 0)
+				expectation.fulfill()
+			},
+			failure: { _ in
+				XCTFail("Should Never GET ERROR")
+			})
+			DispatchQueue.concurrentPerform(iterations: 1_000) {
+				futureUT.resolve(with: $0)
+			}
+		}, within: 4, fulfillmentCount: 1_000)
+	}
+
+	func testFutureWithConcurrencyFailure() {
+		let futureUT = Future<Int>()
+		let stubError = NSError(domain: "", code: 1, userInfo: nil)
+
+		expect("Future notifies failure 1000 times", { expectation in
+			futureUT.on(success: { _ in
+				XCTFail("Should Never GET ERROR")
+			},
+			failure: { _ in
+				expectation.fulfill()
+			})
+			DispatchQueue.concurrentPerform(iterations: 1_000) { _ in
+				futureUT.reject(with: stubError)
+			}
+		}, within: 4, fulfillmentCount: 1_000)
+	}
+
+	func testFutureWithConcurrencySuccessAndFailure() {
+		let futureUT = Future<Int>()
+		let stubError = NSError(domain: "", code: 1, userInfo: nil)
+
+		expect("Future notifies success and failure 1000 times", { expectation in
+			futureUT.on(success: { _ in
+				expectation.fulfill()
+			},
+			failure: { _ in
+				expectation.fulfill()
+			})
+			DispatchQueue.concurrentPerform(iterations: 1000_000) {
+				if $0.isMultiple(of: 2) {
+					futureUT.reject(with: stubError)
+				}
+				else {
+					futureUT.resolve(with: $0)
+				}
+			}
+		}, within: 4, fulfillmentCount: 1000_000)
 	}
 }
