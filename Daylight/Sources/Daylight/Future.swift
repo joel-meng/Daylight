@@ -67,16 +67,16 @@ public class Future<Value>: FutureUpdater, FutureObserver {
 	private lazy var listeners: [(Result<Value, Error>) -> Void] = []
 
 	/// Result data that to be notified in future.
-	private var result: Atomic<Result<Value, Error>>? {
+	private var result: Atomic<Result<Value, Error>?> {
 		didSet {
-			(result?.value).map(notify)
+			(result.value).map(notify)
 		}
 	}
 
 	// MARK: - Initializer
 
 	public init() {
-		result = nil
+		result = Atomic<Result<Value, Error>?>(nil)
 	}
 
 	public init(_ value: Value) {
@@ -109,29 +109,21 @@ public class Future<Value>: FutureUpdater, FutureObserver {
 			}
 		})
 
-		(result?.value).map(notify)
+		result.value.map(notify)
 	}
 
 	// MARK: - Result updating
 
 	public func resolve(with value: Value) {
-		guard var result = result else {
-			self.result = Atomic(.success(value))
-			return
-		}
 		result.value {
-			return $0 = .success(value)
+			$0 = .success(value)
 		}
 	}
 
 	public func reject(with error: Error) {
-		guard var result = result else {
-			self.result = Atomic(.failure(error))
-			return
+		result.value {
+			$0 = .failure(error)
 		}
-		result.value({ result in
-			result = .failure(error)
-		})
 	}
 
 	// MARK: - Functional
