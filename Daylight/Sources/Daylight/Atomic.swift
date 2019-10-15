@@ -25,7 +25,7 @@ SOFTWARE.
 import Foundation
 
 /// An internal `Concurrent` dispatch queue that to access the value.
-fileprivate let mutex = DispatchQueue(label: "Atomic-Daylight/joel-meng/com.github",
+private let mutex = DispatchQueue(label: "Atomic-Daylight/joel-meng/com.github",
 									  attributes: .concurrent)
 
 /// A value type that wrappes a `Value` in atomic updating who would get updated in multiple thread.
@@ -44,10 +44,8 @@ struct Atomic<Value> {
 
 	/// A getter for accessing the value.
 	var value: Value {
-		get {
-			mutex.sync {
-				_value
-			}
+		mutex.sync {
+			_value
 		}
 	}
 

@@ -30,7 +30,7 @@ public protocol Cancellable {
 	/// Update `Future` object with a cancel action which will be called once `cancel` is called
 	/// - Parameter action: A function that tells `Future` object how to cancel a `Future` value been sent.
 	/// 					A error `FutureError.cancelled` will be sent to observers.
-	var cancelAction: (() -> Void)? { set get }
+	var cancelAction: (() -> Void)? { get set }
 
 	/// Function to cancel a `Future`. When a `Future` been cancelled, a error `FutureError.cancelled` will be sent to
 	/// listeners and no more value or error will be received by listeners.
@@ -57,10 +57,10 @@ final public class CancellableFuture<Value>: Cancellable, FutureObserver, Future
 		}
 	}
 
-	private let futureDelegate: Future<Value>
+	private let futureComposition: Future<Value>
 
 	public init() {
-		self.futureDelegate = Future<Value>()
+		self.futureComposition = Future<Value>()
 	}
 
 	// MARK: - Cancellable
@@ -75,22 +75,21 @@ final public class CancellableFuture<Value>: Cancellable, FutureObserver, Future
 	// MARK: - FutureObserver
 
 	public func onSuccess(_ successCallback: @escaping (Value) -> Void) {
-		futureDelegate.onSuccess(successCallback)
+		futureComposition.onSuccess(successCallback)
 	}
 
-	public func on(success successCallback: @escaping (Value) -> Void,
-				   failure failureCallback: ((Error) -> Void)?) {
-		futureDelegate.on(success: successCallback, failure: failureCallback)
+	public func on(success successCallback: @escaping (Value) -> Void, failure failureCallback: ((Error) -> Void)?) {
+		futureComposition.on(success: successCallback, failure: failureCallback)
 	}
 
 	// MARK: - FutureUpdater
 
 	public func resolve(with value: Value) {
-		futureDelegate.resolve(with: value)
+		futureComposition.resolve(with: value)
 	}
 
 	public func reject(with error: Error) {
-		futureDelegate.reject(with: error)
+		futureComposition.reject(with: error)
 	}
 }
 
@@ -99,11 +98,10 @@ public enum FutureError: Error {
 }
 
 extension FutureError: Equatable {
-	public static func ==(lhs: FutureError, rhs: FutureError) -> Bool {
+	public static func == (lhs: FutureError, rhs: FutureError) -> Bool {
 		switch(lhs, rhs) {
 		case (cancelled, cancelled):
 			return true
 		}
 	}
 }
-

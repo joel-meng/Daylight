@@ -48,7 +48,7 @@ class CancellableFutureTests: XCTestCase {
 		let cancellableFuture = CancellableFuture<Int>()
 
 		expect("Failure called with FutureError.cancelled", { (expectation: XCTestExpectation) in
-			cancellableFuture.on(success: { futureValue in
+			cancellableFuture.on(success: { _ in
 				XCTFail("Never should be called.")
 			}, failure: { error in
 				XCTAssertEqual((error as! FutureError), FutureError.cancelled)
@@ -61,7 +61,7 @@ class CancellableFutureTests: XCTestCase {
 	func testCancellableFutureCancelledAfterObserverSetWithOnlySuccessListening() {
 		let cancellableFuture = CancellableFuture<Int>()
 
-		expectNotHappen("", { (expectation: XCTestExpectation) in
+		expectNotHappen("", { _ in
 			cancellableFuture.onSuccess { (_) in
 				XCTFail("Never should be called.")
 			}
@@ -75,7 +75,7 @@ class CancellableFutureTests: XCTestCase {
 		expect("Failure called with FutureError.cancelled", { (expectation: XCTestExpectation) in
 			cancellableFuture.cancel()
 
-			cancellableFuture.on(success: { futureValue in
+			cancellableFuture.on(success: { _ in
 				expectation.fulfill()
 				XCTFail("Never should be called.")
 			}, failure: { error in
@@ -88,7 +88,7 @@ class CancellableFutureTests: XCTestCase {
 	func testCancellableFutureCancelledBeforeObserverSetWithOnlySuccessListening() {
 		let cancellableFuture = CancellableFuture<Int>()
 
-		expectNotHappen("", { (expectation: XCTestExpectation) in
+		expectNotHappen("", { _ in
 			cancellableFuture.cancel()
 			cancellableFuture.onSuccess { (_) in
 				XCTFail("Never should be called.")
@@ -96,13 +96,12 @@ class CancellableFutureTests: XCTestCase {
 		})
 	}
 
-
 	// MARK: - Mutiple cancellations
 
 	func testCancellableFutureCancelledMultipleTimesAfterObserverSet() {
 		let cancellableFuture = CancellableFuture<Int>()
 		expect("Failure called with FutureError.cancelled", { (expectation: XCTestExpectation) in
-			cancellableFuture.on(success: { futureValue in
+			cancellableFuture.on(success: { _ in
 				XCTFail("Never should be called.")
 			}, failure: { error in
 				XCTAssertEqual((error as! FutureError), FutureError.cancelled)
@@ -122,7 +121,7 @@ class CancellableFutureTests: XCTestCase {
 			cancellableFuture.cancel()
 			cancellableFuture.cancel()
 
-			cancellableFuture.on(success: { futureValue in
+			cancellableFuture.on(success: { _ in
 				expectation.fulfill()
 				XCTFail("Never should be called.")
 			}, failure: { error in
@@ -137,7 +136,7 @@ class CancellableFutureTests: XCTestCase {
 
 		expect("Failure called with FutureError.cancelled", { (expectation: XCTestExpectation) in
 			cancellableFuture.cancel()
-			cancellableFuture.on(success: { futureValue in
+			cancellableFuture.on(success: { _ in
 				XCTFail("Never should be called.")
 			}, failure: { error in
 				XCTAssertEqual((error as! FutureError), FutureError.cancelled)
@@ -167,6 +166,4 @@ class CancellableFutureTests: XCTestCase {
 		future.cancel()
 		XCTAssertTrue(future.isCancelled)
 	}
-
-
 }

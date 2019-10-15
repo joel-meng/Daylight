@@ -22,7 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-
 import XCTest
 @testable import Daylight
 
@@ -50,7 +49,7 @@ class FutureTests: XCTestCase {
 		let error = NSError(domain: "", code: 0, userInfo: nil)
 		let futureUT = Future<Int>(error: error)
 		expect("Success should be called", { (expectation) in
-			futureUT.on(success: { value in
+			futureUT.on(success: { _ in
 				XCTFail("Success should not be called.")
 			}, failure: { error in
 				expectation.fulfill()
@@ -76,7 +75,7 @@ class FutureTests: XCTestCase {
 		let futureUT = Future<Int>()
 		let stubError = NSError(domain: "", code: 1, userInfo: nil)
 		expect("Rejection should be called", { (expectation) in
-			futureUT.on(success: { (value) in
+			futureUT.on(success: { _ in
 				XCTFail("Should never been called")
 			}, failure: { error in
 				expectation.fulfill()
@@ -118,7 +117,7 @@ class FutureTests: XCTestCase {
 		let initialFuture = Future<Int>()
 		let futureUT = initialFuture.map { $0 * 2 }
 		expect("Success should be caled", { (expectation) in
-			futureUT.on(success: { futureValue in
+			futureUT.on(success: { _ in
 				XCTFail("Should never be called.")
 			}, failure: { error in
 				expectation.fulfill()

@@ -61,7 +61,6 @@ public protocol FutureObserver {
 	func on(success successCallback: @escaping (Value) -> Void, failure failureCallback: ((Error) -> Void)?)
 }
 
-
 public class Future<Value>: FutureUpdater, FutureObserver {
 
 	/// Listeners who is observing result's update
@@ -100,8 +99,7 @@ public class Future<Value>: FutureUpdater, FutureObserver {
 		on(success: successCallback, failure: nil)
 	}
 
-	public func on(success successCallback: @escaping (Value) -> Void,
-			failure failureCallback: ((Error) -> Void)?) {
+	public func on(success successCallback: @escaping (Value) -> Void, failure failureCallback: ((Error) -> Void)?) {
 		listeners.append({ (result) in
 			switch result {
 			case .success(let value):
