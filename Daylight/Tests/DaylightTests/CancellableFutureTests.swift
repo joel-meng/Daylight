@@ -149,11 +149,10 @@ class CancellableFutureTests: XCTestCase {
 	func testCancellableFutureCancelledBeforeAndAfterWithOnlySuccessListener() {
 		let cancellableFuture = CancellableFuture<Int>()
 
-		expectNotHappen("Failure called with FutureError.cancelled", { (expectation: XCTestExpectation) in
+		expectNotHappen("Failure called with FutureError.cancelled", { _ in
 			cancellableFuture.cancel()
 			cancellableFuture.onSuccess { (_) in
 				XCTFail("Never should be called.")
-				expectation.fulfill()
 			}
 			cancellableFuture.cancel()
 		})

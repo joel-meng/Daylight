@@ -131,7 +131,7 @@ class FutureTests: XCTestCase {
 
 	func testFutureWithConcurrencySuccess() {
 		let futureUT = Future<Int>()
-		expect("Future notifies success 1000 times", { expectation in
+		expect("Future notifies success 100_000 times", { expectation in
 			futureUT.on(success: { (newValue) in
 				XCTAssertGreaterThanOrEqual(newValue, 0)
 				expectation.fulfill()
@@ -139,41 +139,41 @@ class FutureTests: XCTestCase {
 			failure: { _ in
 				XCTFail("Should Never GET ERROR")
 			})
-			DispatchQueue.concurrentPerform(iterations: 1_000) {
+			DispatchQueue.concurrentPerform(iterations: 100_000) {
 				futureUT.resolve(with: $0)
 			}
-		}, within: 4, fulfillmentCount: 1_000)
+		}, within: 4, fulfillmentCount: 100_000)
 	}
 
 	func testFutureWithConcurrencyFailure() {
 		let futureUT = Future<Int>()
 		let stubError = NSError(domain: "", code: 1, userInfo: nil)
 
-		expect("Future notifies failure 1000 times", { expectation in
+		expect("Future notifies failure 100_000 times", { expectation in
 			futureUT.on(success: { _ in
 				XCTFail("Should Never GET ERROR")
 			},
 			failure: { _ in
 				expectation.fulfill()
 			})
-			DispatchQueue.concurrentPerform(iterations: 1_000) { _ in
+			DispatchQueue.concurrentPerform(iterations: 100_000) { _ in
 				futureUT.reject(with: stubError)
 			}
-		}, within: 4, fulfillmentCount: 1_000)
+		}, within: 4, fulfillmentCount: 100_000)
 	}
 
 	func testFutureWithConcurrencySuccessAndFailure() {
 		let futureUT = Future<Int>()
 		let stubError = NSError(domain: "", code: 1, userInfo: nil)
 
-		expect("Future notifies success and failure 1000 times", { expectation in
+		expect("Future notifies success and failure 100_000 times", { expectation in
 			futureUT.on(success: { _ in
 				expectation.fulfill()
 			},
 			failure: { _ in
 				expectation.fulfill()
 			})
-			DispatchQueue.concurrentPerform(iterations: 1000_000) {
+			DispatchQueue.concurrentPerform(iterations: 100_000) {
 				if $0.isMultiple(of: 2) {
 					futureUT.reject(with: stubError)
 				}
@@ -181,6 +181,6 @@ class FutureTests: XCTestCase {
 					futureUT.resolve(with: $0)
 				}
 			}
-		}, within: 4, fulfillmentCount: 1000_000)
+		}, within: 4, fulfillmentCount: 100_000)
 	}
 }

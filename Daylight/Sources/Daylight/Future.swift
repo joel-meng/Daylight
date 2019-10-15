@@ -61,10 +61,6 @@ public protocol FutureObserver {
 	func on(success successCallback: @escaping (Value) -> Void, failure failureCallback: ((Error) -> Void)?)
 }
 
-/// An internal `Concurrent` dispatch queue that used to invoke `listeners` callback.
-private let notificationQueue = DispatchQueue(label: "Future Concurrent Queue - Daylight/joel-meng/com.github",
-											  attributes: .concurrent)
-
 public class Future<Value>: FutureUpdater, FutureObserver {
 
 	/// Listeners who is observing result's update
@@ -72,8 +68,6 @@ public class Future<Value>: FutureUpdater, FutureObserver {
 
 	/// Result data that to be notified in future.
 	private let result: Atomic<Result<Value, Error>?>
-
-	private var notificationQueue: DispatchQueue?
 
 	// MARK: - Initializer
 
