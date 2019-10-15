@@ -32,10 +32,14 @@ class AtomicTests: XCTestCase {
 
     override func tearDown() {}
 
+	// MARK: - Initialization
+
 	func testInitiliazing() {
 		let atomic = Atomic<Int>(10)
 		XCTAssertEqual(atomic.value, 10)
 	}
+
+	// MARK: - Preformance Tests
 
     func testAtomicWrite() {
 		var atomic = Atomic<Int>(0)
@@ -84,5 +88,4 @@ class AtomicTests: XCTestCase {
 
 		XCTAssertEqual(atomic.value, 10_000)
     }
-
 }

@@ -24,13 +24,12 @@ SOFTWARE.
 
 import Foundation
 
+/// An internal `Concurrent` dispatch queue that to access the value.
+fileprivate let mutex = DispatchQueue(label: "Atomic-Daylight/joel-meng/com.github",
+									  attributes: .concurrent)
 
 /// A value type that wrappes a `Value` in atomic updating who would get updated in multiple thread.
 struct Atomic<Value> {
-
-	/// An internal `Concurrent` dispatch queue that to access the value.
-	private let mutex = DispatchQueue(label: "Atomic-Daylight/joel-meng/com.github",
-									  attributes: .concurrent)
 
 	/// Thread safe wrapped value
 	private var _value: Value
@@ -51,7 +50,6 @@ struct Atomic<Value> {
 			}
 		}
 	}
-
 
 	/// A mutating setter function for value which keeps value updating `Thread-Safe`
 	/// - Parameter transform: An closure which used to update the actual value in a atomic transaction.
